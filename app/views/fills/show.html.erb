@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @fill %>
+
+<div>
+  <%= link_to "Edit this fill", edit_fill_path(@fill) %> |
+  <%= link_to "Back to fills", fills_path %>
+
+  <%= button_to "Destroy this fill", @fill, method: :delete %>
+</div>

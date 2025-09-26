@@ -8,3 +8,58 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.swatch {
+  margin: 60px 0;
+}
+
+.fills {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+
+.fillCard {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+}
+
+.fillColor {
+  width: 200px;
+  height: 50px;
+}
+
+.fillCardInfo {
+  background-color: white;
+  padding: 10px;
+}
+
+.fillName {
+  color: grey;
+}
+
+.fillsTeaser {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  width: 600px;
+}
+
+.fillTeaser {
+  width: 50px;
+  height: 50px;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+}

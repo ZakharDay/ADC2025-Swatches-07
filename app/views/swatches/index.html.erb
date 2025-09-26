@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Swatches" %>
+
+<h1>Swatches</h1>
+
+<div id="swatches">
+  <% @swatches.each do |swatch| %>
+    <%= render swatch %>
+    <p>
+      <%= link_to "Show this swatch", swatch %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New swatch", new_swatch_path %>
