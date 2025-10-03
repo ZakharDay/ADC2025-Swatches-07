@@ -5,6 +5,7 @@ class CreateColors < ActiveRecord::Migration[8.0]
       t.string :color
       t.integer :alpha
       t.references :fill, null: false, foreign_key: true
+      t.references :user, null: false, foreign_key: true
 
       t.timestamps
     end

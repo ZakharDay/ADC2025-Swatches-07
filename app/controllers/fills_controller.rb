@@ -1,14 +1,15 @@
 class FillsController < ApplicationController
   layout "application", only: %i[ show new edit create update destroy]
+  before_action :authenticate_user!
   before_action :set_fill, only: %i[ show edit update destroy ]
 
   # GET /fills or /fills.json
   def index
-    @fills = Fill.all
+    @fills = current_user.fills
   end
 
   def solid
-    fills = Fill.all
+    fills = current_user.fills
     @fills = []
 
     fills.each do |fill|
@@ -19,7 +20,7 @@ class FillsController < ApplicationController
   end
 
   def gradient
-    fills = Fill.all
+    fills = current_user.fills
     @fills = []
 
     fills.each do |fill|

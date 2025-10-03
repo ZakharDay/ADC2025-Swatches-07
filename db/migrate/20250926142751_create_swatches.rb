@@ -3,6 +3,7 @@ class CreateSwatches < ActiveRecord::Migration[8.0]
     create_table :swatches do |t|
       t.string :name
       t.integer :project_id
+      t.references :user, null: false, foreign_key: true
 
       t.timestamps
     end

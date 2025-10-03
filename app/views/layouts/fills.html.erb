@@ -24,12 +24,13 @@
 
   <body>
     <%= render "menubar" %>
-
+    
     <h1>Fills</h1>
     <%= link_to "New fill", new_fill_path %>
-
     <%= render "fills/menu" %>
-    
+
     <%= yield %>
+
+    <%= render "footer" %>
   </body>
 </html>

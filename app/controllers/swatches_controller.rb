@@ -1,9 +1,10 @@
 class SwatchesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_swatch, only: %i[ show edit update destroy ]
 
   # GET /swatches or /swatches.json
   def index
-    @swatches = Swatch.where(project_id: nil)
+    @swatches = current_user.swatches.where(project_id: nil)
   end
 
   # GET /swatches/1 or /swatches/1.json
