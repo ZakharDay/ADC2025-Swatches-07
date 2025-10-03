@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_09_26_143731) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_03_123649) do
+  create_table "colors", force: :cascade do |t|
+    t.integer "stop"
+    t.string "color"
+    t.integer "alpha"
+    t.integer "fill_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["fill_id"], name: "index_colors_on_fill_id"
+  end
+
   create_table "fills", force: :cascade do |t|
     t.string "name"
-    t.string "color"
     t.integer "swatch_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -29,12 +38,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_26_143731) do
 
   create_table "swatches", force: :cascade do |t|
     t.string "name"
-    t.integer "project_id", null: false
+    t.integer "project_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["project_id"], name: "index_swatches_on_project_id"
   end
 
+  add_foreign_key "colors", "fills"
   add_foreign_key "fills", "swatches"
-  add_foreign_key "swatches", "projects"
 end

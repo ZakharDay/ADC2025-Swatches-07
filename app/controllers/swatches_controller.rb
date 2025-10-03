@@ -3,7 +3,7 @@ class SwatchesController < ApplicationController
 
   # GET /swatches or /swatches.json
   def index
-    @swatches = Swatch.all
+    @swatches = Swatch.where(project_id: nil)
   end
 
   # GET /swatches/1 or /swatches/1.json

@@ -1,12 +1,7 @@
-<div id="<%= dom_id swatch %>">
-  <p>
-    <strong>Name:</strong>
-    <%= swatch.name %>
-  </p>
+<div class="swatch" id="<%= dom_id swatch %>">
+  <h2><%= link_to swatch.name, swatch %></h2>
 
-  <p>
-    <strong>Project:</strong>
-    <%= swatch.project_id %>
-  </p>
-
+  <div class="fills">
+    <%= render swatch.fills %>
+  </div>
 </div>

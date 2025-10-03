@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  stop: 1
+  color: MyString
+  alpha: 1
+  fill: one
+
+two:
+  stop: 1
+  color: MyString
+  alpha: 1
+  fill: two

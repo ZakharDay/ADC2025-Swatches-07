@@ -6,6 +6,7 @@ def seed
   create_projects(100)
   create_swatches(2..8)
   create_fills(2..8)
+  create_colors
 end
 
 def reset_db
@@ -41,6 +42,14 @@ def create_swatches(quantity)
       puts "Swatch with name #{swatch.name} for project with name #{swatch.project.name} just created"
     end
   end
+
+  i = 1
+
+  quantity.to_a.sample.times do
+    swatch = Swatch.create!(name: "Swatch #{i}")
+    i += 1
+    puts "Swatch with name #{swatch.name} just created"
+  end
 end
 
 def create_fills(quantity)
@@ -48,10 +57,59 @@ def create_fills(quantity)
     i = 1
 
     quantity.to_a.sample.times do
-      fill = swatch.fills.create!(name: "--color-#{i}", color: get_random_color)
+      fill = swatch.fills.create!(name: "--color-#{i}")
       i += 1
-      puts "Fill with var name #{fill.name} with color #{fill.color} for swatch with name #{fill.swatch.name} just created"
+      puts "Fill with var name #{fill.name} for swatch with name #{fill.swatch.name} just created"
     end
+  end
+end
+
+def create_colors
+  Fill.all.each do |fill|
+    type = ['solid', 'gradient'].sample
+
+    if type == 'solid'
+      create_fill_color(fill)
+    elsif type == 'gradient'
+      create_gradient_color(fill)
+    end
+  end
+end
+
+def create_fill_color(fill)
+  color = fill.colors.create(color: get_random_color)
+  puts "Color ##{color.color} just created"
+  
+  color
+end
+
+def create_gradient_color(fill)
+  quantity = (2..5).to_a.sample
+  first_stop = (0..40).to_a.sample
+  last_stop = (60..100).to_a.sample
+
+  if quantity > 2
+    range = last_stop - first_stop
+    step = range / (quantity - 1)
+  end
+
+  i = 1
+
+  quantity.times do
+    stop = 0
+
+    if i == 1
+      stop = first_stop
+    elsif i == quantity
+      stop = last_stop
+    else
+      stop = first_stop + (step * (i - 1))
+    end
+
+    color = fill.colors.create(stop: stop, color: get_random_color)
+    puts "Color ##{color.color} just created"
+
+    i += 1
   end
 end
 

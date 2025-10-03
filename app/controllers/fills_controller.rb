@@ -1,9 +1,32 @@
 class FillsController < ApplicationController
+  layout "application", only: %i[ show new edit create update destroy]
   before_action :set_fill, only: %i[ show edit update destroy ]
 
   # GET /fills or /fills.json
   def index
     @fills = Fill.all
+  end
+
+  def solid
+    fills = Fill.all
+    @fills = []
+
+    fills.each do |fill|
+      if fill.colors.count == 1
+        @fills << fill
+      end
+    end
+  end
+
+  def gradient
+    fills = Fill.all
+    @fills = []
+
+    fills.each do |fill|
+      if fill.colors.count > 1
+        @fills << fill
+      end
+    end
   end
 
   # GET /fills/1 or /fills/1.json
@@ -65,6 +88,6 @@ class FillsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def fill_params
-      params.expect(fill: [ :name, :color, :swatch_id ])
+      params.expect(fill: [ :name, :swatch_id ])
     end
 end

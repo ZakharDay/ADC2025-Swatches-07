@@ -1,17 +1,14 @@
-<div id="<%= dom_id fill %>">
-  <p>
-    <strong>Name:</strong>
-    <%= fill.name %>
-  </p>
+<%= link_to fill, class: "fillCard", id: dom_id(fill) do %>
+  <div class="fillColor" style="background: <%= get_css_background_value(fill) %>"></div>
 
-  <p>
-    <strong>Color:</strong>
-    <%= fill.color %>
-  </p>
+  <div class="fillCardInfo">
+    <div class="fillColorHex">
+      Colors: <%= fill.colors.count %>
+      <%#= css_color %>
+    </div>
 
-  <p>
-    <strong>Swatch:</strong>
-    <%= fill.swatch_id %>
-  </p>
-
-</div>
+    <div class="fillName">
+      Variable: <%= fill.name %>
+    </div>
+  </div>
+<% end %>
