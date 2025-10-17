@@ -1,0 +1,7 @@
+<h3><%= link_to swatch.name, [:admin, swatch] %></h3>
+
+<div class="fillsTeaser">
+  <% swatch.fills.each do |fill| %>
+    <%= render "admin/projects/fill", fill: fill %>
+  <% end %>
+</div>

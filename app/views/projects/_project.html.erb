@@ -1,8 +1,0 @@
-<div id="<%= dom_id project %>">
-  <h2><%= link_to project.name, project %></h2>
-  <p><%= project.description %></p>
-
-  <% project.swatches.each do |swatch| %>
-    <%= render "projects/swatch", swatch: swatch %>
-  <% end %>
-</div>

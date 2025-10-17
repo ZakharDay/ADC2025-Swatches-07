@@ -4,14 +4,16 @@ Rails.application.routes.draw do
   get "welcome/index"
   get "welcome/about"
 
-  resources :colors
-  resources :swatches
-  resources :projects
-  
-  resources :fills do
-    collection do
-      get "solid"
-      get "gradient"
+  namespace :admin do
+    resources :colors
+    resources :swatches
+    resources :projects
+    
+    resources :fills do
+      collection do
+        get "solid"
+        get "gradient"
+      end
     end
   end
 

@@ -1,0 +1,9 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @swatch %>
+
+<div>
+  <%= link_to "Edit this swatch", edit_admin_swatch_path(@swatch) %> |
+  <%= link_to "Back to swatches", admin_swatches_path %>
+  <%= link_to "Destroy this swatch", [:admin, @swatch], data: { turbo_stream: false, turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+</div>

@@ -1,18 +1,21 @@
 <nav class="S_MenuBar">
   <div>
     <%= link_to "Главная", root_url %>
-    <%= link_to "Проекты", projects_url %>
-    <%= link_to "Палитры", swatches_url %>
-    <%= link_to "Цвета", fills_url %>
+
+    <% if user_signed_in? %>
+      <%= link_to "Проекты", admin_projects_url %>
+      <%= link_to "Палитры", admin_swatches_url %>
+      <%= link_to "Цвета", admin_fills_url %>
+    <% end %>
   </div>
 
   <div>
     <% if user_signed_in? %>
-      <%= link_to current_user.email, edit_user_registration_path %>
+      <%#= link_to current_user.email, edit_user_registration_path %>
       <%= link_to "Выйти", destroy_user_session_path, data: { "turbo-method": :delete } %>
-    <% else %>
-      <%= link_to "Войти", new_user_session_path %>
-      <%= link_to "Зарегистрироваться", new_user_registration_path %>
+    <%# else %>
+      <%#= link_to "Войти", new_user_session_path %>
+      <%#= link_to "Зарегистрироваться", new_user_registration_path %>
     <% end %>
   </div>
 </nav>
