@@ -1,5 +1,5 @@
 class SwatchesController < ApplicationController
-  before_action :authenticate_user!
+  load_and_authorize_resource
   before_action :set_swatch, only: %i[ show edit update destroy ]
 
   # GET /swatches or /swatches.json
@@ -23,6 +23,7 @@ class SwatchesController < ApplicationController
   # POST /swatches or /swatches.json
   def create
     @swatch = Swatch.new(swatch_params)
+    @swatch.user = current_user
 
     respond_to do |format|
       if @swatch.save

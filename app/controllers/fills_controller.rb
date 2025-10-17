@@ -1,6 +1,7 @@
 class FillsController < ApplicationController
+  load_and_authorize_resource
+  
   layout "application", only: %i[ show new edit create update destroy]
-  before_action :authenticate_user!
   before_action :set_fill, only: %i[ show edit update destroy ]
 
   # GET /fills or /fills.json
@@ -46,6 +47,7 @@ class FillsController < ApplicationController
   # POST /fills or /fills.json
   def create
     @fill = Fill.new(fill_params)
+    @fill.user = current_user
 
     respond_to do |format|
       if @fill.save

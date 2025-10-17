@@ -1,5 +1,5 @@
 class ColorsController < ApplicationController
-  before_action :authenticate_user!
+  load_and_authorize_resource
   before_action :set_color, only: %i[ show edit update destroy ]
 
   # GET /colors or /colors.json
@@ -23,6 +23,7 @@ class ColorsController < ApplicationController
   # POST /colors or /colors.json
   def create
     @color = Color.new(color_params)
+    @color.user = current_user
 
     respond_to do |format|
       if @color.save
