@@ -4,10 +4,18 @@ Rails.application.routes.draw do
   get "welcome/index"
   get "welcome/about"
 
+  resources :subscriptions, only: :create
+
   namespace :admin do
+    resources :subscriptions
     resources :colors
     resources :swatches
-    resources :projects
+
+    resources :projects do
+      resources :swatches do
+        resources :colors
+      end
+    end
     
     resources :fills do
       collection do

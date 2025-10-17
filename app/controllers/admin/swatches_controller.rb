@@ -25,6 +25,10 @@ class Admin::SwatchesController < ApplicationController
     @swatch = Swatch.new(swatch_params)
     @swatch.user = current_user
 
+    if params[:project_id]
+      @swatch.project_id = params[:project_id]
+    end
+
     respond_to do |format|
       if @swatch.save
         format.html { redirect_to [:admin, @swatch], notice: "Swatch was successfully created." }

@@ -1,4 +1,13 @@
-<%= form_with(model: [:admin, swatch]) do |form| %>
+<%
+  if params[:project_id]
+    project = Project.find(params[:project_id])
+    url = [:admin, project, swatch]
+  else
+    url = [:admin, swatch]
+  end
+%>
+
+<%= form_with(model: url) do |form| %>
   <% if swatch.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(swatch.errors.count, "error") %> prohibited this swatch from being saved:</h2>
@@ -16,11 +25,13 @@
     <%= form.text_field :name %>
   </div>
 
-  <div>
-    <%= form.label :project_id, style: "display: block" %>
-    <%#= form.text_field :project_id %>
-    <%= form.collection_select :project_id, current_user.projects.order(:name), :id, :name, include_blank: true %>
-  </div>
+  <% if !params[:project_id] && action_name == "edit" %>
+    <div>
+      <%= form.label :project_id, style: "display: block" %>
+      <%#= form.text_field :project_id %>
+      <%= form.collection_select :project_id, current_user.projects.order(:name), :id, :name, include_blank: true %>
+    </div>
+  <% end %>
 
   <div>
     <%= form.submit %>

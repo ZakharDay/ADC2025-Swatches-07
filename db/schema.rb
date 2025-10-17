@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_17_131734) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_17_142422) do
   create_table "colors", force: :cascade do |t|
     t.integer "stop"
     t.string "color"
@@ -40,6 +40,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_17_131734) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_projects_on_user_id"
+  end
+
+  create_table "subscriptions", force: :cascade do |t|
+    t.string "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "swatches", force: :cascade do |t|
