@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
   devise_for :users
-  
-  get "welcome/index"
-  get "welcome/about"
 
-  resources :subscriptions, only: :create
+  namespace :api, format: 'json' do
+    namespace :v1 do
+      resources :subscriptions, only: :create
+      resources :swatches, only: [:index, :show]
+    end
+  end
 
   namespace :admin do
     resources :subscriptions
@@ -24,6 +26,11 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  resources :subscriptions, only: :create
+
+  get "welcome/index"
+  get "welcome/about"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

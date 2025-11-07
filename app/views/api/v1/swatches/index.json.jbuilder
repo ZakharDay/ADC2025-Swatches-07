@@ -1,0 +1,1 @@
+json.array! @swatches, partial: "api/v1/swatches/swatch", as: :swatch

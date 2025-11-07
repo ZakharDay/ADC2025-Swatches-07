@@ -3,4 +3,11 @@ class Fill < ApplicationRecord
   belongs_to :user
   belongs_to :swatch
   validates :name, presence: true
+
+  # def as_json
+  #   {
+  #     name: name,
+  #     colors: colors
+  #   }
+  # end
 end
