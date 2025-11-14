@@ -2,6 +2,8 @@
 
 <%= render @fill %>
 
+<%= render @fill.colors %>
+
 <div>
   <%= link_to "Edit this fill", edit_admin_fill_path(@fill) %> |
   <%= link_to "Back to fills", admin_fills_path %>

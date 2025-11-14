@@ -6,12 +6,14 @@ class Ability
   def initialize(user)
     # Define abilities for the user here. For example:
     
-    return unless user.present? && user.admin?
-    can :manage, :all
+    return unless user.present?
+    can :manage, :all, user: user
+    can :read, [Swatch, Fill]
+    can :fork, Swatch
     # can :manage, [Project, Swatch, Fill, Color], user: user
 
-    # return unless user.admin?
-    # can :manage, :all
+    return unless user.admin?
+    can :manage, :all
     
     # The first argument to `can` is the action you are giving the user
     # permission to do.

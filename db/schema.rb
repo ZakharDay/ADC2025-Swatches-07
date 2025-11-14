@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_17_142422) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_14_130915) do
   create_table "colors", force: :cascade do |t|
     t.integer "stop"
     t.string "color"
@@ -29,6 +29,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_17_142422) do
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "origin_id"
     t.index ["swatch_id"], name: "index_fills_on_swatch_id"
     t.index ["user_id"], name: "index_fills_on_user_id"
   end
@@ -54,6 +55,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_17_142422) do
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "origin_id"
     t.index ["user_id"], name: "index_swatches_on_user_id"
   end
 

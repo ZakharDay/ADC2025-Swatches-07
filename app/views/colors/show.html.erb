@@ -1,0 +1,9 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @color %>
+
+<div>
+  <%= link_to "Edit this color", edit_color_path(@color) %> |
+  <%= link_to "Back to colors", colors_path %>
+  <%= link_to "Destroy this color", @color, data: { turbo_stream: false, turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+</div>

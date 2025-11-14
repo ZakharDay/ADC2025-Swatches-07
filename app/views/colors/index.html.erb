@@ -8,9 +8,9 @@
   <% @colors.each do |color| %>
     <%= render color %>
     <p>
-      <%= link_to "Show this color", [:admin, color] %>
+      <%= link_to "Show this color", color %>
     </p>
   <% end %>
 </div>
 
-<%#= link_to "New color", new_admin_color_path %>
+<%= link_to "New color", new_color_path %>

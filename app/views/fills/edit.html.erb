@@ -1,0 +1,12 @@
+<% content_for :title, "Editing fill" %>
+
+<h1>Editing fill</h1>
+
+<%= render "form", fill: @fill %>
+
+<br>
+
+<div>
+  <%= link_to "Show this fill", @fill %> |
+  <%= link_to "Back to fills", fills_path %>
+</div>

@@ -1,0 +1,11 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @fill %>
+
+<%= render @fill.colors %>
+
+<div>
+  <%= link_to "Edit this fill", edit_fill_path(@fill) %> |
+  <%= link_to "Back to fills", fills_path %>
+  <%= link_to "Destroy this fill", @fill, data: { turbo_stream: false, turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+</div>

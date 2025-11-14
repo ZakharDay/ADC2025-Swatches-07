@@ -3,9 +3,9 @@
 
 def seed
   reset_db
-  # create_users(10)
   create_admin_user
-  create_projects(10)
+  create_users(10)
+  create_projects(30)
   create_swatches(2..8)
   create_fills(2..8)
   create_colors

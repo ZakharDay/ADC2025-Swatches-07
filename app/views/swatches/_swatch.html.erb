@@ -1,0 +1,22 @@
+<div class="swatch" id="<%= dom_id swatch %>">
+  <h2><%= link_to swatch.name, swatch %></h2>
+
+  <% if swatch.origin %>
+    <p>
+      Forked from 
+      <%= link_to "#{swatch.origin.user.email}/#{swatch.origin.name}", swatch_path(swatch.origin) %>
+    </p>
+  <% end %>
+
+  <p>
+    <% if can? :edit, swatch %>
+      <%= link_to "Edit swatch", edit_swatch_path(swatch) %>
+    <% else %>
+      <%= link_to "Fork swatch", fork_swatch_path(swatch) %>
+    <% end %>
+  </p>
+
+  <div class="fills">
+    <%= render swatch.fills %>
+  </div>
+</div>
