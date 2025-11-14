@@ -3,12 +3,19 @@
 
 def seed
   reset_db
+
+  create_colors
+
   create_admin_user
   create_users(10)
+
   create_projects(30)
-  create_swatches(2..8)
-  create_fills(2..8)
-  create_colors
+  create_swatches(100..200)
+  create_fills(200..300)
+
+  add_swatches_to_projects
+  add_fills_to_swatches
+  add_colors_to_fills
 end
 
 def reset_db
@@ -25,6 +32,28 @@ def get_random_color
   end
 
   color_hex.join('')
+end
+
+def create_colors
+  # (0..255).each do |r|
+  #   (0..255).each do |g|
+  #     (0..255).each do |b|
+  (100..105).each do |r|
+    (100..105).each do |g|
+      (100..105).each do |b|
+        # Format each component as a two-digit hexadecimal string
+        hex_r = '%02x' % r
+        hex_g = '%02x' % g
+        hex_b = '%02x' % b
+
+        # Combine them into a full hex color string
+        rgb_hash = "#{hex_r}#{hex_g}#{hex_b}"
+
+        color = Color.create!(rgb_hash: rgb_hash)
+        puts "Color ##{color.rgb_hash} just created"
+      end
+    end
+  end
 end
 
 def create_users(quantity)
@@ -63,16 +92,16 @@ def create_projects(quantity)
 end
 
 def create_swatches(quantity)
-  Project.all.each do |project|
-    i = 1
-    user = project.user
+  # Project.all.each do |project|
+  #   i = 1
+  #   user = project.user
 
-    quantity.to_a.sample.times do
-      swatch = project.swatches.create!(name: "Swatch #{i}", user: user)
-      i += 1
-      puts "Swatch with name #{swatch.name} for project with name #{swatch.project.name} just created"
-    end
-  end
+  #   quantity.to_a.sample.times do
+  #     swatch = project.swatches.create!(name: "Swatch #{i}", user: user)
+  #     i += 1
+  #     puts "Swatch with name #{swatch.name} for project with name #{swatch.project.name} just created"
+  #   end
+  # end
 
   i = 1
 
@@ -85,19 +114,47 @@ def create_swatches(quantity)
 end
 
 def create_fills(quantity)
-  Swatch.all.each do |swatch|
-    i = 1
-    user = swatch.user
+  quantity.to_a.sample.times do
+    user = User.all.sample
+    fill = user.fills.create!(name: "Color")
+    puts "Fill with var name #{fill.name} just created"
+  end
+end
 
-    quantity.to_a.sample.times do
-      fill = swatch.fills.create!(name: "--color-#{i}", user: user)
-      i += 1
-      puts "Fill with var name #{fill.name} for swatch with name #{fill.swatch.name} just created"
+def add_swatches_to_projects
+  swatches = Swatch.all
+
+  swatches.each do |swatch|
+    choice = (1..10).to_a.sample
+
+    if choice != 1
+      swatch.project_id = Project.all.sample.id
+      swatch.save!
+      puts "Swatch with id #{swatch.id} just added to project with id #{swatch.project.id}"
     end
   end
 end
 
-def create_colors
+def add_fills_to_swatches
+  fills = Fill.all
+
+  fills.each do |fill|
+    choice = (1..10).to_a.sample
+
+    if choice != 1
+      # Это делается не так, у нас другая связь!!!
+      # fill.swatch_id = Swatch.all.sample.id
+
+      swatch = Swatch.all.sample
+      swatch.fills << fill
+
+      # fill.save!
+      puts "Fill with id #{fill.id} just added to swatch with id #{fill.swatches.first.id}"
+    end
+  end
+end
+
+def add_colors_to_fills
   Fill.all.each do |fill|
     type = ['solid', 'gradient'].sample
 
@@ -110,8 +167,13 @@ def create_colors
 end
 
 def create_fill_color(fill)
-  color = fill.colors.create(color: get_random_color, user: fill.user)
-  puts "Color ##{color.color} just created"
+  # Мы используем другой тип связи
+  # color = fill.colors.create!(color: Color.all.sample)
+
+  color = Color.all.sample
+  fill.colors << color
+
+  puts "Color ##{color.rgb_hash} just added to fill with id #{fill.id}"
   
   color
 end
@@ -139,8 +201,13 @@ def create_gradient_color(fill)
       stop = first_stop + (step * (i - 1))
     end
 
-    color = fill.colors.create(stop: stop, color: get_random_color, user: fill.user)
-    puts "Color ##{color.color} just created"
+    # У нас больше нет stop у color
+    # color = fill.colors.create!(stop: stop, color: Color.all.sample)
+    
+    color = Color.all.sample
+    fill_color = FillColor.create!(fill_id: fill.id, color_id: color.id, stop: stop)
+
+    puts "Color ##{color.rgb_hash} just added to fill with id #{fill.id}"
 
     i += 1
   end
