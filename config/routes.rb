@@ -1,7 +1,17 @@
 Rails.application.routes.draw do
   devise_for :users
 
+  get   "profile",        to: "profile#my",     as: "my_profile"
+  get   "profile/edit",   to: "profile#edit",   as: "edit_profile"
+  patch "profile/update", to: "profile#update", as: "update_profile"
+
+  resources :profile, only: [:show]
+
   resources :projects do
+    collection do
+      get "my"
+    end
+
     resources :swatches do
       # TODO
       resources :colors

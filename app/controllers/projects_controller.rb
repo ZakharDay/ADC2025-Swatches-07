@@ -2,25 +2,25 @@ class ProjectsController < ApplicationController
   load_and_authorize_resource
   before_action :set_project, only: %i[ show edit update destroy ]
 
-  # GET /projects or /projects.json
   def index
     @projects = current_user.projects
   end
 
-  # GET /projects/1 or /projects/1.json
+  def my
+    @projects = current_user.projects
+    render :index
+  end
+
   def show
   end
 
-  # GET /projects/new
   def new
     @project = Project.new
   end
 
-  # GET /projects/1/edit
   def edit
   end
 
-  # POST /projects or /projects.json
   def create
     @project = Project.new(project_params)
     @project.user = current_user
@@ -36,7 +36,6 @@ class ProjectsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /projects/1 or /projects/1.json
   def update
     respond_to do |format|
       if @project.update(project_params)
@@ -49,7 +48,6 @@ class ProjectsController < ApplicationController
     end
   end
 
-  # DELETE /projects/1 or /projects/1.json
   def destroy
     @project.destroy!
 

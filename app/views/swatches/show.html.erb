@@ -7,3 +7,7 @@
   <%= link_to "Back to swatches", swatches_path %>
   <%= link_to "Destroy this swatch", @swatch, data: { turbo_stream: false, turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
 </div>
+
+<section class="comments">
+  <%= render @swatch.comments %>
+</section>

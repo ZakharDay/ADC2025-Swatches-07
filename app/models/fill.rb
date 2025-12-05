@@ -7,5 +7,7 @@ class Fill < ApplicationRecord
   has_many :fill_colors
   has_many :colors, through: :fill_colors
 
+  has_many :comments, as: :commentable
+
   validates :name, presence: true
 end

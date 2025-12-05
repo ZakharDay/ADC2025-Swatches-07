@@ -9,3 +9,7 @@
   <%= link_to "Back to fills", fills_path %>
   <%= link_to "Destroy this fill", @fill, data: { turbo_stream: false, turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
 </div>
+
+<section class="comments">
+  <%= render @fill.comments %>
+</section>

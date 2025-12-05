@@ -12,6 +12,7 @@ def seed
   create_projects(30)
   create_swatches(100..200)
   create_fills(200..300)
+  create_comments(2..10)
 
   add_swatches_to_projects
   add_fills_to_swatches
@@ -38,9 +39,15 @@ def create_colors
   # (0..255).each do |r|
   #   (0..255).each do |g|
   #     (0..255).each do |b|
-  (100..105).each do |r|
-    (100..105).each do |g|
-      (100..105).each do |b|
+  # (100..105).each do |r|
+  #   (100..105).each do |g|
+  #     (100..105).each do |b|
+  
+  color_range = (0..3).to_a + (50..53).to_a + (100..103).to_a + (150..153).to_a + (200..203).to_a + (250..253).to_a
+
+  color_range.each do |r|
+    color_range.each do |g|
+      color_range.each do |b|
         # Format each component as a two-digit hexadecimal string
         hex_r = '%02x' % r
         hex_g = '%02x' % g
@@ -118,6 +125,24 @@ def create_fills(quantity)
     user = User.all.sample
     fill = user.fills.create!(name: "Color")
     puts "Fill with var name #{fill.name} just created"
+  end
+end
+
+def create_comments(quantity)
+  Swatch.all.each do |swatch|
+    quantity.to_a.sample.times do
+      user = User.all.sample
+      comment = user.comments.create!(body: "Text", commentable_type: swatch.class.name, commentable_id: swatch.id )
+      puts "Comment with id #{comment.id} created"
+    end
+  end
+
+  Fill.all.each do |fill|
+    quantity.to_a.sample.times do
+      user = User.all.sample
+      comment = user.comments.create!(body: "Text", commentable_type: fill.class.name, commentable_id: fill.id )
+      puts "Comment with id #{comment.id} created"
+    end
   end
 end
 

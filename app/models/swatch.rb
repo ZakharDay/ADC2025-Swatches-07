@@ -8,5 +8,7 @@ class Swatch < ApplicationRecord
   has_many :forks, class_name: "Swatch", foreign_key: "origin_id"
   belongs_to :origin, class_name: "Swatch", optional: true
 
+  has_many :comments, as: :commentable
+
   validates :name, presence: true
 end

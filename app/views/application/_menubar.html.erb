@@ -3,20 +3,24 @@
     <%= link_to "Главная", root_url %>
 
     <% if user_signed_in? && current_user.admin? %>
-      <%= link_to "Проекты", admin_projects_url %>
-      <%= link_to "Палитры", admin_swatches_url %>
-      <%= link_to "Заливки", admin_fills_url %>
-      <%= link_to "Цвета", admin_colors_url %>
+      <%= link_to "Проекты",  admin_projects_url %>
+      <%= link_to "Палитры",  admin_swatches_url %>
+      <%= link_to "Заливки",  admin_fills_url %>
+      <%= link_to "Цвета",    admin_colors_url %>
       <%= link_to "Подписки", admin_subscriptions_url %>
     <% elsif user_signed_in? %>
       <%= link_to "Палитры", swatches_url %>
+      <%= link_to "Заливки", fills_url %>
+      <%= link_to "Цвета",   colors_url %>
     <% end %>
   </div>
 
   <div>
     <% if user_signed_in? %>
       <%#= link_to current_user.email, edit_user_registration_path %>
-      <%= link_to "Палитры", my_swatches_url %>
+      <%= link_to "Проекты",  my_projects_url %>
+      <%= link_to "Палитры",  my_swatches_url %>
+      <%= link_to "Профиль",  my_profile_url %>
       <%= link_to "Выйти", destroy_user_session_path, data: { "turbo-method": :delete } %>
     <% else %>
       <%= link_to "Войти", new_user_session_path %>

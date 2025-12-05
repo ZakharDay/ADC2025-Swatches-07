@@ -10,11 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_09_26_142401) do
+ActiveRecord::Schema[8.1].define(version: 2025_11_28_141823) do
   create_table "colors", force: :cascade do |t|
     t.string "rgb_hash"
     t.index ["id"], name: "index_colors_on_id"
     t.index ["rgb_hash"], name: "index_colors_on_rgb_hash"
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.text "body"
+    t.integer "commentable_id"
+    t.string "commentable_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "fill_colors", force: :cascade do |t|
@@ -35,6 +45,15 @@ ActiveRecord::Schema[8.1].define(version: 2025_09_26_142401) do
     t.datetime "updated_at", null: false
     t.integer "user_id", null: false
     t.index ["user_id"], name: "index_fills_on_user_id"
+  end
+
+  create_table "profiles", force: :cascade do |t|
+    t.string "avatar"
+    t.datetime "created_at", null: false
+    t.string "name", default: "", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
   create_table "projects", force: :cascade do |t|
@@ -85,9 +104,11 @@ ActiveRecord::Schema[8.1].define(version: 2025_09_26_142401) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "comments", "users"
   add_foreign_key "fill_colors", "colors"
   add_foreign_key "fill_colors", "fills"
   add_foreign_key "fills", "users"
+  add_foreign_key "profiles", "users"
   add_foreign_key "projects", "users"
   add_foreign_key "swatch_fills", "fills"
   add_foreign_key "swatch_fills", "swatches"

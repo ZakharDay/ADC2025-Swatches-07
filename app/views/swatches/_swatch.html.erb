@@ -1,5 +1,6 @@
 <div class="swatch" id="<%= dom_id swatch %>">
   <h2><%= link_to swatch.name, swatch %></h2>
+  <p>By: <%= link_to username(swatch.user), profile_path(swatch.user.profile) %></p>
 
   <% if swatch.origin %>
     <p>
