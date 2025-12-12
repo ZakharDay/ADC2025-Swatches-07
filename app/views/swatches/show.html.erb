@@ -1,3 +1,32 @@
+<%
+  set_meta_tags(
+    title: @swatch.name,
+    description: "Swatch with color fills",
+    keywords: "design, colors",
+    og: {
+      title: @swatch.name,
+      type: "website",
+      url: params[:project_id] ? project_swatch_url(@swatch.project, @swatch) : swatch_url(@swatch)
+    }
+  )
+%>
+
+<% content_for :breadcrumbs do %>
+  <% if params[:project_id] %>
+    <% project = Project.find(params[:project_id]) %>
+
+    <%= link_to "Проекты", my_projects_path %>
+    /
+    <%= link_to project.name, project %>
+    /
+    <%= link_to @swatch.name, project_swatch_path(project, @swatch) %>
+  <% else %>
+    <%= link_to "Палитры", swatches_path %>
+    /
+    <%= link_to @swatch.name, @swatch %>
+  <% end %>
+<% end %>
+
 <p style="color: green"><%= notice %></p>
 
 <%= render @swatch %>
@@ -9,5 +38,10 @@
 </div>
 
 <section class="comments">
+  <h2>
+    <%= @swatch.comments.count %>
+    <%= I18n.translate 'comment', count: @swatch.comments.count %>
+  </h2>
+
   <%= render @swatch.comments %>
 </section>

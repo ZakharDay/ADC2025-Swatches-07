@@ -1,3 +1,16 @@
+<%
+  set_meta_tags(
+    title: @project.name,
+    description: "Project with color swatches",
+    keywords: "design, colors",
+    og: {
+      title: @project.name,
+      type: "website",
+      url: project_url(@project)
+    }
+  )
+%>
+
 <p style="color: green"><%= notice %></p>
 
 <%= render @project %>

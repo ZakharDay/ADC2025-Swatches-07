@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Adc2025 Swatches 07" %></title>
+    <%= display_meta_tags site: "ADC Swatches", reverse: true %>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= yield :head %>
 
     <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
     <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
@@ -24,7 +22,12 @@
 
   <body>
     <%= render "menubar" %>
+    <hr>
+    <%= yield :breadcrumbs %>
+    <hr>
+
     <%= yield %>
+
     <%= render "footer" %>
   </body>
 </html>

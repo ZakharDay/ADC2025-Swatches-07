@@ -1,4 +1,4 @@
-<h3><%= link_to swatch.name, swatch %></h3>
+<h3><%= link_to swatch.name, project_swatch_path(project, swatch) %></h3>
 
 <div class="fillsTeaser">
   <% swatch.fills.each do |fill| %>

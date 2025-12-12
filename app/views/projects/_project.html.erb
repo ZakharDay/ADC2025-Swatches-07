@@ -4,6 +4,6 @@
   <p><%= link_to "New swatch", new_project_swatch_path(project) %></p>
 
   <% project.swatches.each do |swatch| %>
-    <%= render "projects/swatch", swatch: swatch %>
+    <%= render "projects/swatch", project: project, swatch: swatch %>
   <% end %>
 </div>
