@@ -8,3 +8,20 @@
 <div id="new_subscription">
   <%= render "subscriptions/form" %>
 </div>
+
+<h1>Тестовые штуки</h1>
+
+<div data-controller="hello">
+  <input data-hello-target="name" type="text">
+  <button data-action="click->hello#greet">Greet</button>
+</div>
+
+<div data-controller="slideshow" data-slideshow-index-value="1">
+  <button data-action="slideshow#previous"> ← </button>
+  <button data-action="slideshow#next"> → </button>
+
+  <div data-slideshow-target="slide">🐵</div>
+  <div data-slideshow-target="slide">🙈</div>
+  <div data-slideshow-target="slide">🙉</div>
+  <div data-slideshow-target="slide">🙊</div>
+</div>

@@ -1,4 +1,4 @@
-<div>
+<%= turbo_frame_tag dom_id(comment) do %>
   <p><%= username(comment.user)%></p>
 
   <p>
@@ -7,4 +7,14 @@
   </p>
 
   <p><%= comment.body %></p>
-</div>
+
+  <% if defined?(from_stream) && from_stream %>
+  <% else %>
+    <% if can? :manage, comment %> 
+      <p>
+        <%= link_to "Edit", edit_comment_path(comment) %>
+        <%= link_to "Delete", comment, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+      </p>
+    <% end %>
+  <% end %>
+<% end %>

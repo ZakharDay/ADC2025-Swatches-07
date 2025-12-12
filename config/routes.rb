@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   patch "profile/update", to: "profile#update", as: "update_profile"
 
   resources :profile, only: [:show]
+  resources :comments, only: [:show, :edit, :create, :update, :destroy]
 
   resources :projects do
     collection do

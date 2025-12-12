@@ -37,11 +37,4 @@
   <%= link_to "Destroy this swatch", @swatch, data: { turbo_stream: false, turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
 </div>
 
-<section class="comments">
-  <h2>
-    <%= @swatch.comments.count %>
-    <%= I18n.translate 'comment', count: @swatch.comments.count %>
-  </h2>
-
-  <%= render @swatch.comments %>
-</section>
+<%= render "comments/comments", commentable: @swatch %>

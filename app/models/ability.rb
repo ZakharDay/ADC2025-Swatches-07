@@ -7,8 +7,8 @@ class Ability
     # Define abilities for the user here. For example:
     
     return unless user.present?
-    can :manage, [Profile, Project, Swatch, Fill], user: user
-    can :read, [Profile, Swatch, Fill, Color]
+    can :manage, [Comment, Profile, Project, Swatch, Fill], user: user
+    can :read, [Profile, Comment, Swatch, Fill, Color]
     can :fork, Swatch
     # can :manage, [Project, Swatch, Fill, Color], user: user
 
