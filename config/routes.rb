@@ -42,6 +42,13 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :subscriptions, only: :create
       resources :swatches, only: [:index, :show]
+
+      devise_scope :user do
+        post "sign_up",          to: "registrations#create"
+        get  "authorize_by_jwt", to: "sessions#authorize_by_jwt"
+        post "sign_in",          to: "sessions#create"
+        post "sign_out",         to: "sessions#destroy"
+      end
     end
   end
 
