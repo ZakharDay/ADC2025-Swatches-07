@@ -1,13 +1,22 @@
-module JwtAuthenticatable
+module JwtAuth
   extend ActiveSupport::Concern
 
   included do
-    # before_action :require_login
-    helper_method :encrypt_payload, :decrypt_payload
+    helper_method :load_user_by_jti, :encrypt_payload, :decrypt_payload
+  end
+
+  def load_user_by_jti
+    @user = User.find_by_jti(decrypt_payload[0]['jti'])
+
+    unless @user
+      render json: {
+        messages: "Unauthorized",
+        is_success: false,
+      }, status: :unauthorized
+    end
   end
 
   def encrypt_payload(payload)
-    # payload = @user.as_json(only: [:jti])
     jwt_signing_key = Rails.application.credentials.jwt_signing_key!
     token = JWT.encode(payload, jwt_signing_key, 'HS256')
   end
@@ -19,12 +28,4 @@ module JwtAuthenticatable
     token = JWT.decode(jwt, jwt_signing_key, true, { algorithm: 'HS256' })
   end
 
-  # private
-
-  # def require_login
-  #   unless logged_in?
-  #     flash[:alert] = "You must be logged in to access this section"
-  #     redirect_to login_path
-  #   end
-  # end
 end

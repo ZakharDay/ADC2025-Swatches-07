@@ -1,1 +1,0 @@
-json.extract! color, :rgb_hash

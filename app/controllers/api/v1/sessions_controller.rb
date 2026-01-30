@@ -1,4 +1,6 @@
 class Api::V1::SessionsController < Devise::SessionsController
+  include JwtAuth
+
   skip_before_action :verify_authenticity_token
   skip_before_action :verify_signed_out_user, only: [:destroy]
   before_action :load_user_by_email, only: [:create]
@@ -19,7 +21,7 @@ class Api::V1::SessionsController < Devise::SessionsController
       render json: {
         messages: "Sign In Successful",
         is_success: true,
-        jwt: encrypt_payload
+        jwt: encrypt_payload(payload)
       }, status: :ok
     else
       render json: {
@@ -54,30 +56,6 @@ class Api::V1::SessionsController < Devise::SessionsController
           is_success: false,
         }, status: :unauthorized
       end
-    end
-
-    def load_user_by_jti
-      @user = User.find_by_jti(decrypt_payload[0]['jti'])
-
-      unless @user
-        render json: {
-          messages: "Sign Out Failed - Unauthorized",
-          is_success: false,
-        }, status: :unauthorized
-      end
-    end
-
-    def encrypt_payload
-      payload = @user.as_json(only: [:jti])
-      jwt_signing_key = Rails.application.credentials.jwt_signing_key!
-      token = JWT.encode(payload, jwt_signing_key, 'HS256')
-    end
-
-    def decrypt_payload
-      bearer = request.headers["Authorization"]
-      jwt = bearer.split(' ').last
-      jwt_signing_key = Rails.application.credentials.jwt_signing_key!
-      token = JWT.decode(jwt, jwt_signing_key, true, { algorithm: 'HS256' })
     end
 
 end

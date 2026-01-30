@@ -45,7 +45,7 @@ Rails.application.routes.draw do
   namespace :api, format: "json" do
     namespace :v1 do
       resources :subscriptions, only: :create
-      resources :swatches, only: [:index, :show]
+      resources :swatches, only: [:index, :show, :create]
       get "fills", to: "fills#my"
 
       devise_scope :user do
