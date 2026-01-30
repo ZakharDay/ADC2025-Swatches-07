@@ -9,6 +9,11 @@ class FillsController < ApplicationController
     @fills = current_user.fills
   end
 
+  def my
+    @fills = current_user.fills
+    render :index
+  end
+
   def solid
     fills = current_user.fills
     @fills = []

@@ -1,1 +1,1 @@
-json.extract! color, :color, :alpha, :stop
+json.extract! color, :rgb_hash

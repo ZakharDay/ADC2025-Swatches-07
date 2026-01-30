@@ -1,0 +1,1 @@
+json.array! @fills, partial: "api/v1/swatches/fill", as: :fill
