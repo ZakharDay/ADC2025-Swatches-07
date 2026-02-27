@@ -2,11 +2,10 @@ class Api::V1::SwatchesController < ApplicationController
   include JwtAuth
 
   skip_before_action :verify_authenticity_token
-  before_action :load_user_by_jti, only: :create
+  before_action :load_user_by_jti, only: [:index, :create]
 
   def index
-    # @swatches = current_user.swatches.where(project_id: nil)
-    @swatches = Swatch.all.limit(8)
+    @swatches = @user.swatches
   end
 
   def show
@@ -29,7 +28,7 @@ class Api::V1::SwatchesController < ApplicationController
         render json: {
           messages: "Swatch create",
           is_success: true,
-          swatch_id: swatch.id
+          id: swatch.id
         }, status: :ok
       end
     else
