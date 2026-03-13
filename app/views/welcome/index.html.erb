@@ -9,19 +9,42 @@
   <%= render "subscriptions/form" %>
 </div>
 
-<h1>Тестовые штуки</h1>
+<div class="S_PromoSwatchSlider" data-controller="promo-swatch-slider">
+  <div class=W_PromoSwatchContent>
+    <div class="W_PromoSwatchRail" data-promo-swatch-slider-target="swatchRail">
+      <div class="O_PromoSwatch" data-promo-swatch-slider-target="swatch">
+        <div class="A_PromoSwatchFill"></div>
+        <div class="A_PromoSwatchFill"></div>
+        <div class="A_PromoSwatchFill"></div>
+      </div>
 
-<div data-controller="hello">
-  <input data-hello-target="name" type="text">
-  <button data-action="click->hello#greet">Greet</button>
-</div>
+      <div class="O_PromoSwatch" data-promo-swatch-slider-target="swatch">
+        <div class="A_PromoSwatchFill"></div>
+        <div class="A_PromoSwatchFill"></div>
+        <div class="A_PromoSwatchFill"></div>
+      </div>
 
-<div data-controller="slideshow" data-slideshow-index-value="1">
-  <button data-action="slideshow#previous"> ← </button>
-  <button data-action="slideshow#next"> → </button>
+      <div class="O_PromoSwatch" data-promo-swatch-slider-target="swatch">
+        <div class="A_PromoSwatchFill"></div>
+        <div class="A_PromoSwatchFill"></div>
+        <div class="A_PromoSwatchFill"></div>
+      </div>
+    </div>
+  </div>
 
-  <div data-slideshow-target="slide">🐵</div>
-  <div data-slideshow-target="slide">🙈</div>
-  <div data-slideshow-target="slide">🙉</div>
-  <div data-slideshow-target="slide">🙊</div>
+  <div class="W_PromoSwatchControls">
+    <div class="W_PromoSwatchArrow">
+      <div class="A_IconButton prev" data-promo-swatch-slider-target="prevButton" data-action="click->promo-swatch-slider#prevSwatch">A</div>
+    </div>
+
+    <div class="W_PromoSwatchMeatballs">
+      <div class="A_Meatball" data-promo-swatch-slider-target="meatballButton" data-promo-swatch-slider-swatch-index-param="0" data-action="click->promo-swatch-slider#moveByIndex"></div>
+      <div class="A_Meatball" data-promo-swatch-slider-target="meatballButton" data-promo-swatch-slider-swatch-index-param="1" data-action="click->promo-swatch-slider#moveByIndex"></div>
+      <div class="A_Meatball" data-promo-swatch-slider-target="meatballButton" data-promo-swatch-slider-swatch-index-param="2" data-action="click->promo-swatch-slider#moveByIndex"></div>
+    </div>
+
+    <div class="W_PromoSwatchArrow">
+      <div class="A_IconButton next" data-promo-swatch-slider-target="nextButton" data-action="click->promo-swatch-slider#nextSwatch">V</div>
+    </div>
+  </div>
 </div>

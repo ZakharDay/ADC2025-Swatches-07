@@ -1,0 +1,13 @@
+.A_IconButton {
+  width: 20px;
+  height: 20px;
+  text-align: center;
+
+  &.prev {
+    /* background-color: aqua; */
+  }
+
+  &.next {
+    /* background-color: blue; */
+  }
+}

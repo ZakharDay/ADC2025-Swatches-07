@@ -1,0 +1,86 @@
+.S_PromoSwatchSlider {
+  position: relative;
+  width: 600px;
+  height: 120px;
+  margin: 100px auto;
+  background-color: lightgray;
+  border-radius: 10px;
+
+  .W_PromoSwatchContent {
+    overflow: hidden;
+    /* overflow-y: scroll; */
+    height: 120px;
+    border-radius: 10px;
+
+    .W_PromoSwatchRail {
+      display: flex;
+      flex-direction: column;
+      /* gap: 4px; */
+      height: 120px;
+      transition: all 0.3s ease;
+
+      .O_PromoSwatch {
+        display: flex;
+        height: 120px;
+        min-height: 120px;
+        padding: 4px;
+        border-radius: 8px;
+        /* background-color: chartreuse; */
+        overflow: hidden;
+
+        .A_PromoSwatchFill {
+          width: 33.333333%;
+
+          &:nth-child(1) {
+            background-color: aqua;
+            border-radius: 8px 0 0 8px;
+          }
+
+          &:nth-child(2) {
+            background-color: antiquewhite;
+          }
+
+          &:nth-child(3) {
+            background-color: aquamarine;
+            border-radius: 0 8px 8px 0;
+          }
+        }
+      }
+    }
+  }
+
+  .W_PromoSwatchControls {
+    position: absolute;
+    top: 0;
+    right: -30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 20px;
+    height: 120px;
+    padding: 4px 0;
+    /* background-color: black; */
+
+    .W_PromoSwatchArrow {
+      width: 20px;
+      height: 20px;
+
+      .A_IconButton {
+        &.disabled {
+          display: none;
+        }
+      }
+    }
+
+    .W_PromoSwatchMeatballs {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+
+      .A_Meatball {
+      }
+    }
+  }
+}
