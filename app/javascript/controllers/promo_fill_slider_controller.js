@@ -5,8 +5,8 @@ export default class extends Controller {
     'prevButton',
     'nextButton',
     'meatballButton',
-    'swatchRail',
-    'swatch',
+    'fillRail',
+    'fill',
   ];
 
   static values = { index: Number };
@@ -14,36 +14,35 @@ export default class extends Controller {
   initialize() {
     this.connected = false;
     this.slideshow = null;
-    this.swatchesLength = null;
+    this.fillsLength = null;
   }
 
   connect() {
     this.connected = true;
-    this.swatchesLength = this.swatchTargets.length;
+    this.fillsLength = this.fillTargets.length;
     this.startSlideShow();
   }
 
   indexValueChanged() {
-    this.moveSwatch();
+    this.moveFill();
     this.updateMoveButtons();
-    this.updateMeatballs();
   }
 
-  swatchTargetConnected() {
+  fillTargetConnected() {
     if (this.connected) {
       clearInterval(this.slideshow);
-      this.indexValue = this.swatchesLength - 1;
-      this.swatchTarget.classList.add('removing');
+      this.indexValue = this.fillsLength - 4;
+      this.fillTarget.classList.add('removing');
 
       setTimeout(() => {
-        this.swatchTarget.remove();
+        this.fillTarget.remove();
       }, 300);
     }
   }
 
   startSlideShow() {
     this.slideshow = setInterval(() => {
-      if (this.indexValue < 2) {
+      if (this.indexValue < 8) {
         this.indexValue++;
       } else {
         clearInterval(this.slideshow);
@@ -51,46 +50,36 @@ export default class extends Controller {
     }, 3000);
   }
 
-  prevSwatch() {
+  prevFill() {
     if (this.indexValue > 0) {
       this.indexValue--;
     }
   }
 
-  nextSwatch() {
-    if (this.indexValue < this.swatchesLength - 1) {
+  nextFill() {
+    if (this.indexValue < this.fillsLength - 4) {
       this.indexValue++;
     }
   }
 
-  moveSwatch() {
-    this.swatchRailTarget.style.transform = `translateY(${-100 * this.indexValue}%)`;
+  moveFill() {
+    this.fillRailTarget.style.transform = `translateX(${-149 * this.indexValue}px)`;
   }
 
   moveByIndex(event) {
-    this.indexValue = event.params.swatchIndex;
+    this.indexValue = event.params.fillIndex;
   }
 
   updateMoveButtons() {
     if (this.indexValue <= 0) {
       this.prevButtonTarget.classList.add('disabled');
       this.nextButtonTarget.classList.remove('disabled');
-    } else if (this.indexValue >= this.swatchesLength - 1) {
+    } else if (this.indexValue >= this.fillsLength - 4) {
       this.prevButtonTarget.classList.remove('disabled');
       this.nextButtonTarget.classList.add('disabled');
     } else {
       this.nextButtonTarget.classList.remove('disabled');
       this.prevButtonTarget.classList.remove('disabled');
     }
-  }
-
-  updateMeatballs() {
-    this.meatballButtonTargets.forEach((meatballButton, index) => {
-      if (index == this.indexValue) {
-        meatballButton.classList.add('current');
-      } else {
-        meatballButton.classList.remove('current');
-      }
-    });
   }
 }

@@ -56,6 +56,15 @@ class FillsController < ApplicationController
 
     respond_to do |format|
       if @fill.save
+        add_colors_to_fills(@fill)
+
+        Turbo::StreamsChannel.broadcast_append_to(
+          "promo_fill_rail",
+          target: "W_PromoFillRail",
+          partial: "components/A_PromoFill",
+          locals: { fill: @fill }
+        )
+
         format.html { redirect_to @fill, notice: "Fill was successfully created." }
         format.json { render :show, status: :created, location: @fill }
       else
@@ -96,6 +105,63 @@ class FillsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def fill_params
-      params.expect(fill: [ :name, :swatch_id ])
+      params.expect(fill: [ :name ])
     end
+
+    # 
+    # Из seeds
+    # Потом удалить или отрефакторить
+    # 
+
+    def add_colors_to_fills(fill)
+      type = ['solid', 'gradient'].sample
+
+      if type == 'solid'
+        create_fill_color(fill)
+      elsif type == 'gradient'
+        create_gradient_color(fill)
+      end
+    end
+
+    def create_fill_color(fill)
+      color = Color.all.sample
+      fill.colors << color
+    end
+
+    def create_gradient_color(fill)
+      quantity = (2..5).to_a.sample
+      first_stop = (0..40).to_a.sample
+      last_stop = (60..100).to_a.sample
+
+      if quantity > 2
+        range = last_stop - first_stop
+        step = range / (quantity - 1)
+      end
+
+      if (0..9).to_a.sample == 0
+        alpha = (0..99).to_a.sample
+      else
+        alpha = nil
+      end
+
+      i = 1
+
+      quantity.times do
+        stop = 0
+
+        if i == 1
+          stop = first_stop
+        elsif i == quantity
+          stop = last_stop
+        else
+          stop = first_stop + (step * (i - 1))
+        end
+
+        color = Color.all.sample
+        FillColor.create!(fill_id: fill.id, color_id: color.id, stop: stop, alpha: alpha)
+
+        i += 1
+      end
+    end
+
 end

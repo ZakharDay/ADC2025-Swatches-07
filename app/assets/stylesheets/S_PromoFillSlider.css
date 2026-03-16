@@ -1,69 +1,70 @@
-.S_PromoSwatchSlider {
+.S_PromoFillSlider {
   position: relative;
   width: 600px;
   height: 120px;
-  /* margin: 100px auto; */
   background-color: lightgray;
   border-radius: 10px;
 
-  .W_PromoSwatchContent {
+  .W_PromoFillContent {
     overflow: hidden;
     /* overflow-y: scroll; */
+    /* overflow-x: scroll; */
     height: 120px;
     border-radius: 10px;
 
-    .W_PromoSwatchRail {
+    .W_PromoFillRail {
       display: flex;
-      flex-direction: column;
-      /* gap: 4px; */
-      height: 120px;
       transition: all 0.3s ease;
 
-      .O_PromoSwatch {
+      .A_PromoFill {
         display: flex;
+        width: 149px;
+        min-width: 149px;
         height: 120px;
         min-height: 120px;
-        padding: 4px;
+        padding: 4px 0 4px 4px;
         border-radius: 8px;
         overflow: hidden;
         transition: all 0.3s ease;
 
+        &:first-child {
+          padding: 4px 0 4px 4px;
+        }
+
+        &:last-child {
+          width: 153px;
+          min-width: 153px;
+          padding: 4px;
+        }
+
         &.removing {
-          min-height: 0%;
+          min-width: 0%;
           padding: 0;
         }
 
-        .A_PromoSwatchFill {
-          &:first-child {
-            border-radius: 8px 0 0 8px;
-          }
-
-          &:last-child {
-            border-radius: 0 8px 8px 0;
-          }
-
-          &:only-child {
-            border-radius: 8px;
-          }
+        .Q_Fill {
+          width: 100%;
+          height: 100%;
+          border-radius: 8px;
         }
       }
     }
   }
 
-  .W_PromoSwatchControls {
+  .W_PromoFillControls {
     position: absolute;
-    top: 0;
-    right: -30px;
+    top: 130px;
+    left: 0;
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
     justify-content: space-between;
     align-items: center;
-    width: 20px;
-    height: 120px;
+    width: 100%;
+    height: 20px;
     padding: 4px 0;
     /* background-color: black; */
 
-    .W_PromoSwatchArrow {
+    .W_PromoFillArrow {
       width: 20px;
       height: 20px;
 
@@ -72,13 +73,6 @@
           display: none;
         }
       }
-    }
-
-    .W_PromoSwatchMeatballs {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
     }
   }
 }

@@ -1,0 +1,27 @@
+<div class="S_PromoSwatchSlider" data-controller="promo-swatch-slider" data-promo-swatch-slider-index-value="0">
+  <%= turbo_stream_from "promo_swatch_rail" %>
+  
+  <div class=W_PromoSwatchContent>
+    <div class="W_PromoSwatchRail" id="W_PromoSwatchRail" data-promo-swatch-slider-target="swatchRail">
+      <% promo_swatches.each do |swatch| %>
+        <%= render partial: "components/O_PromoSwatch", locals: { swatch: swatch } %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="W_PromoSwatchControls">
+    <div class="W_PromoSwatchArrow">
+      <div class="A_IconButton prev" data-promo-swatch-slider-target="prevButton" data-action="click->promo-swatch-slider#prevSwatch">A</div>
+    </div>
+
+    <div class="W_PromoSwatchMeatballs">
+      <% promo_swatches.each_with_index do |swatch, index| %>
+        <%= render partial: "components/A_PromoSwatchMeatball", locals: { index: index } %>
+      <% end %>
+    </div>
+
+    <div class="W_PromoSwatchArrow">
+      <div class="A_IconButton next" data-promo-swatch-slider-target="nextButton" data-action="click->promo-swatch-slider#nextSwatch">V</div>
+    </div>
+  </div>
+</div>

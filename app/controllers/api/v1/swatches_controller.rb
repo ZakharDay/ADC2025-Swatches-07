@@ -25,6 +25,13 @@ class Api::V1::SwatchesController < ApplicationController
           swatch.fills << fill
         end
 
+        Turbo::StreamsChannel.broadcast_append_to(
+          "promo_swatch_rail",
+          target: "W_PromoSwatchRail",
+          partial: "components/O_PromoSwatch",
+          locals: { swatch: swatch }
+        )
+
         render json: {
           messages: "Swatch create",
           is_success: true,

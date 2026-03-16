@@ -1,0 +1,7 @@
+<% width = [100.0 / swatch.fills.count, '%'].join('') %>
+
+<div class="O_PromoSwatch" data-promo-swatch-slider-target="swatch">
+  <% swatch.fills.each do |fill| %>
+    <%= render partial: "components/A_PromoSwatchFill", locals: { fill: fill, width: width } %>
+  <% end %>
+</div>

@@ -1,0 +1,21 @@
+<div class="S_PromoFillSlider" data-controller="promo-fill-slider" data-promo-fill-slider-index-value="0">
+  <%= turbo_stream_from "promo_fill_rail" %>
+  
+  <div class=W_PromoFillContent>
+    <div class="W_PromoFillRail" id="W_PromoFillRail" data-promo-fill-slider-target="fillRail">
+      <% promo_fills.each do |fill| %>
+        <%= render partial: "components/A_PromoFill", locals: { fill: fill } %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="W_PromoFillControls">
+    <div class="W_PromoFillArrow">
+      <div class="A_IconButton prev" data-promo-fill-slider-target="prevButton" data-action="click->promo-fill-slider#prevFill">A</div>
+    </div>
+
+    <div class="W_PromoFillArrow">
+      <div class="A_IconButton next" data-promo-fill-slider-target="nextButton" data-action="click->promo-fill-slider#nextFill">V</div>
+    </div>
+  </div>
+</div>

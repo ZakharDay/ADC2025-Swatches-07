@@ -1,0 +1,7 @@
+.T_WelcomeWidgets {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 20px;
+  height: 320px;
+  padding: 100px 0;
+}
