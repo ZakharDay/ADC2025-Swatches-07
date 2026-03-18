@@ -53,12 +53,14 @@ export default class extends Controller {
 
   prevSwatch() {
     if (this.indexValue > 0) {
+      clearInterval(this.slideshow);
       this.indexValue--;
     }
   }
 
   nextSwatch() {
     if (this.indexValue < this.swatchesLength - 1) {
+      clearInterval(this.slideshow);
       this.indexValue++;
     }
   }

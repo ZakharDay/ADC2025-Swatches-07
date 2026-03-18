@@ -32,11 +32,9 @@ Rails.application.routes.draw do
   resources :fills do
     collection do
       get "my"
-    end
-
-    collection do
       get "solid"
       get "gradient"
+      get "add_fill_color"
     end
   end
 

@@ -52,12 +52,14 @@ export default class extends Controller {
 
   prevFill() {
     if (this.indexValue > 0) {
+      clearInterval(this.slideshow);
       this.indexValue--;
     }
   }
 
   nextFill() {
     if (this.indexValue < this.fillsLength - 4) {
+      clearInterval(this.slideshow);
       this.indexValue++;
     }
   }

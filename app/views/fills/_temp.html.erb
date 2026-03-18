@@ -1,0 +1,21 @@
+      <div>
+        <div>
+          <label for="rgb_hash">Заливка</label>
+          <input type="color" name="rgb_hash" id="rgb_hash" value="#<%= fill_color.color.rgb_hash %>">
+
+          <label for="color_id">Color Id</label>
+          <input type="number" name="color_id" id="color_id" value="<%= fill_color.color_id %>">
+        </div>
+
+        <div>
+          <label for="alpha">Прозрачность</label>
+          <input type="range" min="0" max="100" step="1" name="alpha" id="alpha" placeholder="alpha" value="<%= fill_color.alpha %>">
+        </div>
+
+        <% if fill_colors_quantity > 1 %>
+          <div>
+            <label for="stop">Стоп</label>
+            <input type="range" min="0" max="100" step="1" name="stop" id="stop" placeholder="stop" value="<%= fill_color.stop %>">
+          </div>
+        <% end %>
+      </div>

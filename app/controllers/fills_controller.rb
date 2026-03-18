@@ -49,6 +49,10 @@ class FillsController < ApplicationController
   def edit
   end
 
+  def add_fill_color
+    render partial: "fills/form_fill_color", locals: { fill_color: FillColor.new }
+  end
+
   # POST /fills or /fills.json
   def create
     @fill = Fill.new(fill_params)

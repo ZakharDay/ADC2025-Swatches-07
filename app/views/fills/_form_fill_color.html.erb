@@ -1,0 +1,15 @@
+<%
+  rgb_hash = fill_color.color ? "\##{fill_color.color.rgb_hash}" : ""
+%>
+
+<div data-fill-form-target="fillColor">
+  <div>
+    <label for="rgb_hash">Заливка</label>
+    <input type="color" name="rgb_hash" id="rgb_hash" value="<%= rgb_hash %>">
+  </div>
+
+  <div>
+    <label for="alpha">Прозрачность</label>
+    <input type="range" min="0" max="100" step="1" name="alpha" id="alpha" placeholder="alpha" value="<%= fill_color.alpha %>">
+  </div>
+</div>

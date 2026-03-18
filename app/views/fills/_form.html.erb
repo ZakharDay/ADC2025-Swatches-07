@@ -16,6 +16,60 @@
     <%= form.text_field :name %>
   </div>
 
+  <div data-controller="fill-form">
+    <template data-fill-form-target="newColorTemplate">
+      <div data-fill-form-target="fillColor">
+        <div>
+          <label for="rgb_hash">Заливка</label>
+          <input type="color" name="rgb_hash" id="rgb_hash">
+        </div>
+
+        <div>
+          <label for="alpha">Прозрачность</label>
+          <input type="range" min="0" max="100" step="1" name="alpha" id="alpha" placeholder="alpha" value="100">
+        </div>
+
+        <div data-fill-form-target="fillColorStop" class="fillColorStop"></div>
+      </div>
+    </template>
+
+    <template data-fill-form-target="colorStopTemplate">
+      <div>
+        <label for="stop">Стоп</label>
+
+        <input
+          data-fill-form-target="colorStopInput"
+          data-fill-form-index-param=""
+          data-action="input->fill-form#changeFillColorStop"
+          class="changeFillColorStop"
+          type="range"
+          min="0"
+          max="100"
+          step="1"
+          name="stop"
+          id="stop"
+          placeholder="stop">
+      </div>
+    </template>
+
+    <div id="fill_colors" data-fill-form-target="fillColors">
+      <% fill.fill_colors.each do |fill_color| %>
+        <%= render partial: "fills/form_fill_color", locals: { fill_color: fill_color } %>
+      <% end %>
+    </div>
+
+    <div>
+      <div
+        class="plusButton"
+        data-action="click->fill-form#addColor"
+        data-fill-form-url-param="<%= add_fill_color_fills_url %>">
+          + Добавить заливку
+      </div>
+    </div>
+  </div>
+
+  <%#= turbo_frame_tag "fill_colors" %>
+
   <div>
     <%= form.submit %>
   </div>
