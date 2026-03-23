@@ -1,0 +1,17 @@
+.M_ColorPickerResult {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  width: 260px;
+
+  .W_ColorPickerResultField {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    input {
+      width: 40px;
+    }
+  }
+}

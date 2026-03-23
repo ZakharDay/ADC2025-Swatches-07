@@ -1,0 +1,24 @@
+.M_ColorPickerSlider {
+  position: relative;
+  width: 260px;
+  height: 20px;
+  margin: 20px 0;
+  border: 1px solid lightgrey;
+
+  &.hue {
+    background-image: linear-gradient(
+      90deg,
+      #f00 0%,
+      #ff0 16%,
+      #0f0 32%,
+      #0ff 48%,
+      #00f 64%,
+      #f0f 80%,
+      #f00 100%
+    );
+  }
+
+  .A_ColorPickerSliderThumb {
+    position: absolute;
+  }
+}

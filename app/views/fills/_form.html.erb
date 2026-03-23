@@ -17,16 +17,59 @@
   </div>
 
   <div data-controller="fill-form">
+    <template data-fill-form-target="fillPreviewTemplate">
+      <div class="O_FillPreview" data-fill-form-target="fillPreview"></div>
+    </template>
+
+    <template data-fill-form-target="colorPickerTemplate">
+      <div class="O_ColorPicker">
+        <div
+          class="M_ColorPickerHistogram"
+          data-fill-form-index-param=""
+          data-action="click->fill-form#handleHueChange">
+          
+          <div class="A_ColorPickerHistogramThumb"></div>
+        </div>
+
+        <div class="W_ColorPickerParams">
+          <div class="M_ColorPickerSlider hue">
+            <div class="A_ColorPickerSliderThumb"></div>
+          </div>
+
+          <div class="M_ColorPickerSlider alpha">
+            <div class="A_ColorPickerSliderThumb"></div>
+          </div>
+
+          <div class="M_ColorPickerResult">
+            <div class="W_ColorPickerResultField">
+              <label for="redColor">R</label>
+              <input type="text" name="redColor" id="redColor">
+            </div>
+
+            <div class="W_ColorPickerResultField">
+              <label for="greenColor">G</label>
+              <input type="text" name="greenColor" id="greenColor">
+            </div>
+
+            <div class="W_ColorPickerResultField">
+              <label for="blueColor">B</label>
+              <input type="text" name="blueColor" id="blueColor">
+            </div>
+
+            <div class="W_ColorPickerResultField">
+              <label for="alphaColor">A</label>
+              <input type="text" name="alphaColor" id="alphaColor">
+            </div>
+          </div>
+        </div>
+      </div>
+    </template>
+
     <template data-fill-form-target="newColorTemplate">
       <div data-fill-form-target="fillColor">
         <div>
           <label for="rgb_hash">Заливка</label>
-          <input type="color" name="rgb_hash" id="rgb_hash">
-        </div>
-
-        <div>
-          <label for="alpha">Прозрачность</label>
-          <input type="range" min="0" max="100" step="1" name="alpha" id="alpha" placeholder="alpha" value="100">
+          <input type="text" name="rgb_hash" id="rgb_hash">
         </div>
 
         <div data-fill-form-target="fillColorStop" class="fillColorStop"></div>
