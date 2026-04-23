@@ -1,3 +1,5 @@
+console.log('UTILITIES');
+
 function hsbToRgb(h, s, b) {
   s /= 100; // normalize saturation to 0-1
   b /= 100; // normalize brightness (value) to 0-1
